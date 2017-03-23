@@ -45,6 +45,9 @@ extern NSString * _Nonnull const LGSideMenuControllerDidShowRightViewNotificatio
 extern NSString * _Nonnull const LGSideMenuControllerWillHideRightViewNotification;
 extern NSString * _Nonnull const LGSideMenuControllerDidHideRightViewNotification;
 
+static NSString * _Nonnull const LGSideMenuSegueLeftIdentifier  = @"left";
+static NSString * _Nonnull const LGSideMenuSegueRightIdentifier = @"right";
+
 #pragma mark - Types
 
 typedef void (^ _Nullable LGSideMenuControllerCompletionHandler)();
@@ -415,7 +418,7 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
  else if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig), then 1.2
  else if (presentationStyle == LGSideMenuPresentationStyleScaleFromLittle), then 0.8
  */
-@property (assign, nonatomic) IBInspectable CGFloat leftViewInititialScale;
+@property (assign, nonatomic) IBInspectable CGFloat leftViewInitialScale;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
  Default:
@@ -423,7 +426,7 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
  else if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig), then 1.2
  else if (presentationStyle == LGSideMenuPresentationStyleScaleFromLittle), then 0.8
  */
-@property (assign, nonatomic) IBInspectable CGFloat rightViewInititialScale;
+@property (assign, nonatomic) IBInspectable CGFloat rightViewInitialScale;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
@@ -431,29 +434,44 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
  if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then -width/2
  else 0.0
  */
-@property (assign, nonatomic) IBInspectable CGFloat leftViewInititialOffsetX;
+@property (assign, nonatomic) IBInspectable CGFloat leftViewInitialOffsetX;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then -width/2
  else 0.0
  */
-@property (assign, nonatomic) IBInspectable CGFloat rightViewInititialOffsetX;
+@property (assign, nonatomic) IBInspectable CGFloat rightViewInitialOffsetX;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
  Default:
- if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then 1.0
- else 1.4
+ if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig), then 1.4
+ else 1.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundImageInitialScale;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
  Default:
- if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then 1.0
- else 1.4
+ if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig), then 1.4
+ else 1.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat rightViewBackgroundImageInitialScale;
+
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleScaleFromLittle), then 1.4
+ else 1.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundImageFinalScale;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleScaleFromLittle), then 1.4
+ else 1.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewBackgroundImageFinalScale;
 
 #pragma mark - Only getters
 
@@ -542,9 +560,17 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 
 #pragma mark - Left view actions
 
+- (void)showLeftView;
+- (void)hideLeftView;
+- (void)toggleLeftView;
+
 - (IBAction)showLeftView:(nullable id)sender;
 - (IBAction)hideLeftView:(nullable id)sender;
 - (IBAction)toggleLeftView:(nullable id)sender;
+
+- (void)showLeftViewAnimated;
+- (void)hideLeftViewAnimated;
+- (void)toggleLeftViewAnimated;
 
 - (IBAction)showLeftViewAnimated:(nullable id)sender;
 - (IBAction)hideLeftViewAnimated:(nullable id)sender;
@@ -574,9 +600,17 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 
 #pragma mark - Right view actions
 
+- (void)showRightView;
+- (void)hideRightView;
+- (void)toggleRightView;
+
 - (IBAction)showRightView:(nullable id)sender;
 - (IBAction)hideRightView:(nullable id)sender;
 - (IBAction)toggleRightView:(nullable id)sender;
+
+- (void)showRightViewAnimated;
+- (void)hideRightViewAnimated;
+- (void)toggleRightViewAnimated;
 
 - (IBAction)showRightViewAnimated:(nullable id)sender;
 - (IBAction)hideRightViewAnimated:(nullable id)sender;

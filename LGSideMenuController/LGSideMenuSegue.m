@@ -1,6 +1,6 @@
 //
-//  LGSideMenuControllerFramework.h
-//  LGSideMenuControllerFramework
+//  LGSideMenuSegue.m
+//  LGSideMenuController
 //
 //
 //  The MIT License (MIT)
@@ -27,14 +27,18 @@
 //  SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "LGSideMenuSegue.h"
+#import "LGSideMenuController.h"
 
-//! Project version number for LGSideMenuController framework.
-FOUNDATION_EXPORT double LGSideMenuControllerVersionNumber;
+@implementation LGSideMenuSegue
 
-//! Project version string for LGSideMenuController framework.
-FOUNDATION_EXPORT const unsigned char LGSideMenuControllerVersionString[];
+- (void)perform {
+    if ([self.identifier.lowercaseString isEqualToString:LGSideMenuSegueLeftIdentifier]) {
+        [(LGSideMenuController *)self.sourceViewController setLeftViewController:self.destinationViewController];
+    }
+    else if ([self.identifier.lowercaseString isEqualToString:LGSideMenuSegueRightIdentifier]) {
+        [(LGSideMenuController *)self.sourceViewController setRightViewController:self.destinationViewController];
+    }
+}
 
-#import <LGSideMenuController/LGSideMenuController.h>
-#import <LGSideMenuController/LGSideMenuSegue.h>
-#import <LGSideMenuController/UIViewController+LGSideMenuController.h>
+@end
